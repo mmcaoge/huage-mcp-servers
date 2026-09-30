@@ -5,6 +5,7 @@
 import { Router } from 'express';
 import { randomUUID } from 'node:crypto';
 import { getDb } from '../db/db.js';
+import { ipRateLimit } from './mcpCommon.js';
 
 const router = Router();
 
@@ -16,6 +17,9 @@ router.use((req, res, next) => {
   if (req.method === 'OPTIONS') return res.sendStatus(204);
   next();
 });
+
+// 安全：公开端点限流（每 IP 每分钟 60 次，防匿名滥用）
+router.use(ipRateLimit());
 
 const PROTOCOL = '2024-11-05';
 const SERVER_INFO = { name: 'hndcw-mcp', version: '1.0.0' };
@@ -170,8 +174,47 @@ router.post('/', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-  res.setHeader('Allow', 'POST, DELETE');
-  res.status(405).json({ error: 'Method Not Allowed' });
+  // SSE 探测：声明 event-stream 的 GET 按规范保持流（本服务器无服务端主动推送，立即结束）
+  const accept = req.get('accept') || '';
+  if (accept.includes('text/event-stream') && !accept.includes('text/html')) {
+    res.setHeader('Content-Type', 'text/event-stream');
+    return res.end();
+  }
+  // 浏览器访问：友好介绍页（避免看起来像故障）
+  const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const toolRows = TOOLS.map(t => `
+      <tr><td class="tn">${esc(t.name)}</td><td>${esc(t.description || '')}</td></tr>`).join('');
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send(`<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${esc(SERVER_INFO.name)} · MCP Server</title>
+<style>
+body{font-family:-apple-system,'Segoe UI','Microsoft YaHei',sans-serif;background:#f6f7fb;color:#1f2430;margin:0;padding:40px 16px}
+.card{max-width:760px;margin:0 auto;background:#fff;border-radius:14px;padding:32px;box-shadow:0 2px 12px rgba(20,30,60,.08)}
+h1{font-size:22px;margin:0 0 4px}
+.badge{display:inline-block;background:#e8f7ee;color:#0a7d43;border:1px solid #bfe8cf;border-radius:999px;padding:2px 12px;font-size:13px;margin:6px 0 18px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+td{border-top:1px solid #eceff4;padding:9px 8px;vertical-align:top}
+.tn{font-family:Consolas,monospace;color:#6d28d9;white-space:nowrap;width:34%}
+pre{background:#14181f;color:#d7e2f0;border-radius:10px;padding:14px;overflow:auto;font-size:12.5px}
+a{color:#2563eb;text-decoration:none}
+.muted{color:#687182;font-size:13px}
+</style></head><body><div class="card">
+<h1>${esc(SERVER_INFO.name)}</h1>
+<div class="badge">● MCP Streamable HTTP · 在线</div>
+<p class="muted">海南社会调查网（hndcw.com）开放 MCP 端点 · 全国政府招投标/建设项目库查询 · 只读数据服务</p>
+<h3>提供的工具 / Tools</h3>
+<table>${toolRows}</table>
+<h3>接入方式 / Usage</h3>
+<pre>POST /mcp HTTP/1.1
+Content-Type: application/json
+
+{"jsonrpc":"2.0","id":1,"method":"tools/list"}
+
+# Claude / Cursor 等客户端直接配置 remote MCP URL 即可</pre>
+<p class="muted">开源仓库：<a href="https://github.com/mmcaoge/huage-mcp-servers">github.com/mmcaoge/huage-mcp-servers</a> · 官方 Registry：io.github.mmcaoge</p>
+</div></body></html>`);
 });
 
 router.delete('/', (req, res) => {
