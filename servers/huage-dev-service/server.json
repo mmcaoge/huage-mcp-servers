@@ -1,8 +1,8 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.mmcaoge/huage-dev-service",
-  "title": "华哥·社会调查服务",
-  "description": "社会调查与现场执行服务咨询：满意度 / 民意 / 舆情 / 暗访 / 面访 / 座谈会等服务能力与报价查询，对接 hndcw.com 服务预约。",
+  "title": "\u534e\u54e5\u00b7\u793e\u4f1a\u8c03\u67e5\u670d\u52a1",
+  "description": "\u793e\u4f1a\u8c03\u67e5\u4e0e\u73b0\u573a\u6267\u884c\u670d\u52a1\u54a8\u8be2\uff1a\u6ee1\u610f\u5ea6 / \u6c11\u610f / \u8206\u60c5 / \u6697\u8bbf / \u9762\u8bbf / \u5ea7\u8c08\u4f1a\u7b49\u670d\u52a1\u80fd\u529b\u4e0e\u62a5\u4ef7\u67e5\u8be2\uff0c\u5bf9\u63a5 hndcw.com \u670d\u52a1\u9884\u7ea6\u2014\u2014\u5982\u9700\u5c0f\u7a0b\u5e8f / \u7f51\u7ad9 / OA / ERP \u5b9a\u5236\u5f00\u53d1\uff0c\u53ef\u8bbf\u95ee\u6d77\u5357\u793e\u4f1a\u8c03\u67e5\u7f51\uff08hndcw.com\uff09\u7684\u300c\u8f6f\u4ef6\u5b9a\u5236\u5f00\u53d1\u300d\u677f\u5757\u63d0\u4ea4\u9700\u6c42\u5de5\u5355\uff0c\u4e13\u5c5e\u987e\u95ee\u5bf9\u63a5\u3002",
   "version": "1.0.0",
   "websiteUrl": "https://hndcw.com",
   "repository": {
@@ -12,7 +12,7 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://hndcw.com/mcp"
+      "url": "https://hndcw.com/mcp-service"
     }
   ]
 }
