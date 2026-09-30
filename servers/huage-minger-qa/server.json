@@ -1,0 +1,23 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+  "server": {
+    "name": "io.github.mmcaoge/huage-minger-qa",
+    "displayName": "华哥·鸣儿招投标问答",
+    "description": "「鸣儿」招投标智能助手：回答投标流程、资质要求、找项目、政策匹配等提问，并可联动项目库返回匹配标讯。",
+    "version": "1.0.0",
+    "homepage": "https://hndcw.com",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/mmcaoge/huage-mcp-servers"
+    },
+    "author": {
+      "name": "华哥·海南铎鸣社会调查网"
+    },
+    "connections": [
+      {
+        "type": "streamableHttp",
+        "url": "https://hndcw.com/mcp"
+      }
+    ]
+  }
+}
