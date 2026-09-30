@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/mcp.schema.json",
   "name": "huage-mcp",
   "version": "1.0.0",
-  "description": "华哥（海南铎鸣）官方 MCP 端点：全国政府招投标 / 建设项目库查询。",
+  "description": "华哥（海南社会调查网）官方 MCP 端点：全国政府招投标 / 建设项目库查询。",
   "servers": {
     "huage-bidding-data": {
       "type": "http",
