@@ -1,6 +1,6 @@
 # 华哥 · 官方 MCP 服务器（huage-mcp-servers）
 
-海南铎鸣社会调查网（hndcw.com）对外提供的 **Model Context Protocol (MCP)** 开放端点集合。
+海南社会调查网（hndcw.com）对外提供的 **Model Context Protocol (MCP)** 开放端点集合。
 所有服务器均指向已部署在公网的统一端点 `https://hndcw.com/mcp`（Streamable HTTP 传输）。
 
 ## 包含的服务器
@@ -44,7 +44,7 @@ npm i express
 - Token / 凭据仅存于部署侧，本仓库不包含任何密钥。
 
 ## 许可
-代码以 MIT 许可开源；数据版权归海南铎鸣社会调查网所有。
+代码以 MIT 许可开源；数据版权归海南社会调查网所有。
 
 ---
 
