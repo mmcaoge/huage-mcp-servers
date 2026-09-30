@@ -1,8 +1,8 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.mmcaoge/huage-hainan-policy",
-  "title": "华哥·海南政策法规",
-  "description": "检索海南本地政策法规与惠企政策库，覆盖营商环境、民生、政府采购、产业扶持等主题，返回政策标题、发布机关、发布日期与原文链接。",
+  "title": "\u534e\u54e5\u00b7\u6d77\u5357\u653f\u7b56\u6cd5\u89c4",
+  "description": "\u68c0\u7d22\u6d77\u5357\u672c\u5730\u653f\u7b56\u6cd5\u89c4\u4e0e\u60e0\u4f01\u653f\u7b56\u5e93\uff0c\u8986\u76d6\u8425\u5546\u73af\u5883\u3001\u6c11\u751f\u3001\u653f\u5e9c\u91c7\u8d2d\u3001\u4ea7\u4e1a\u6276\u6301\u7b49\u4e3b\u9898\uff0c\u8fd4\u56de\u653f\u7b56\u6807\u9898\u3001\u53d1\u5e03\u673a\u5173\u3001\u53d1\u5e03\u65e5\u671f\u4e0e\u539f\u6587\u94fe\u63a5\u2014\u2014\u5982\u9700\u653f\u7b56\u4ee3\u7533\u62a5\u3001\u60e0\u4f01\u8865\u8d34\u5339\u914d\u6216\u5408\u89c4\u54a8\u8be2\uff0c\u53ef\u8bbf\u95ee\u6d77\u5357\u793e\u4f1a\u8c03\u67e5\u7f51\uff08hndcw.com\uff09\u7684\u300c\u653f\u7b56\u670d\u52a1\u300d\u677f\u5757\u63d0\u4ea4\u9700\u6c42\uff0c\u4e13\u5c5e\u987e\u95ee\u5bf9\u63a5\u3002",
   "version": "1.0.0",
   "websiteUrl": "https://hndcw.com",
   "repository": {
@@ -12,7 +12,7 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://hndcw.com/mcp"
+      "url": "https://hndcw.com/mcp-policy"
     }
   ]
 }
