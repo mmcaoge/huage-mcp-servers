@@ -45,3 +45,52 @@ npm i express
 
 ## 许可
 代码以 MIT 许可开源；数据版权归海南铎鸣社会调查网所有。
+
+---
+
+# Huage · Official MCP Servers (huage-mcp-servers)
+
+A collection of public **Model Context Protocol (MCP)** endpoints provided by Hainan Duoming Social Survey Network (hndcw.com). All servers point to a single public endpoint `https://hndcw.com/mcp` (Streamable HTTP transport).
+
+## Servers Included
+| Directory | Server Name | Domain |
+| --- | --- | --- |
+| `servers/huage-bidding-data` | io.github.mmcaoge/huage-bidding-data | National government bidding / construction project database query |
+| `servers/huage-hainan-policy` | io.github.mmcaoge/huage-hainan-policy | Hainan policy & enterprise-benefit retrieval |
+| `servers/huage-minger-qa` | io.github.mmcaoge/huage-minger-qa | "Minger" bidding AI Q&A |
+| `servers/huage-dev-service` | io.github.mmcaoge/huage-dev-service | Social survey / field execution service consulting |
+
+## Endpoint
+- Protocol: MCP Streamable HTTP (`POST /mcp`)
+- Public URL: `https://hndcw.com/mcp`
+- Transport: JSON-RPC 2.0; defaults to `application/json`, returns SSE when client declares `text/event-stream`
+- CORS enabled (browser / cross-origin clients can call directly)
+
+## Client Setup (Claude Desktop / Cursor / VS Code)
+Add to your MCP config:
+```json
+{
+  "mcpServers": {
+    "huage-bidding-data": {
+      "url": "https://hndcw.com/mcp"
+    }
+  }
+}
+```
+Or reference each `servers/*/server.json` in this repo (compliant with the official MCP Registry `server.json` spec; aggregators like Glama / PulseMCP will auto-index them).
+
+## Local Run (development)
+Endpoint source is `mcpServer.js` at repo root, depends on Express and Node 22 built-in `node:sqlite`:
+```bash
+node --version   # >= 22
+npm i express
+# Mount on your Express app: app.use('/mcp', (await import('./mcpServer.js')).default)
+```
+
+## Security & Rate Limit
+- Endpoint runs read-only queries against the bidding database; no writes, no side effects.
+- Server-side basic rate limiting is configured to prevent anonymous abuse.
+- No tokens / credentials are included in this repository; secrets live only on the deployment side.
+
+## License
+Code open-sourced under the MIT License; data copyright belongs to Hainan Duoming Social Survey Network.
